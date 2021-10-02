@@ -1,0 +1,77 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
+
+:root{
+    --header: #29404D;
+    --sidebar: rgb(223, 217, 217);
+}
+
+*,
+*::after,
+*::before{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    font-family: 'Open Sans', sans-serif;
+    font-size: 62.5%;
+}
+.App{
+    width: 100%;
+    height: 100vh;
+    /* display: flex; */
+    /* overflow: hidden; */
+}
+
+/* header start */
+.Header{
+    background-color: var(--header);
+    color:white;
+    line-height: 1.2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.logo-box .logo{
+    font-size: 2.5rem;
+    /* text-transform: uppercase; */
+    padding-top: 1.2rem;
+    font-weight: 500;
+}
+.slogan {
+    font-size: 1rem;
+    padding: 0.5rem 0 0 1rem;
+}
+/* header end */
+
+
+/* main start */
+.Main{
+    display: flex;
+}
+/* main end */
+
+
+/* sidebar start */
+.Sidebar{
+    background-color: var(--sidebar);
+    height: 100vh;
+    width: 20%;
+}
+.sidebar-box{
+    /* text-align: center; */
+    padding-top: 1rem;
+}
+.todosOf{
+    font-size: 1.5rem;
+}
+.todosOf__item{
+    font-size: 1.2rem;
+}
+/* sidebar end */
+
+/* make todo button start */
+
+
+
+/* make todo button end */
