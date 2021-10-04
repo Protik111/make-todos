@@ -3,6 +3,7 @@
 :root{
     --header: #29404D;
     --sidebar: rgb(223, 217, 217);
+    --cyan: darkcyan;
 }
 
 *,
@@ -14,7 +15,7 @@
 }
 body{
     font-family: 'Open Sans', sans-serif;
-    font-size: 62.5%;
+    /* font-size: 62.5%; */
 }
 .App{
     width: 100%;
@@ -70,8 +71,68 @@ body{
 }
 /* sidebar end */
 
-/* make todo button start */
+/* modal start */
+.add-btn{
+    width: 10rem;
+}
+.Modal{
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    height: 100%;
+    width: 100%;
+}
 
-
-
-/* make todo button end */
+.Modal .modalContainer {
+    position: absolute;
+    top: 25%;
+    left: 50%;
+    transform: translate(-50%, 0%);
+    background-color: white;
+    width: 25%;
+    height: 55vh;
+    /* text-align: center; */
+    border-radius: 7px;
+}
+.todoName{
+    width: 70%;
+    padding: 0.6rem 0;
+    font-size: 0.7rem;
+    border: none;
+    border-bottom: 1px solid var(--header);
+    transition: all 0.3s ease-in-out;
+}
+.modalBox input:focus {
+    font-size: 0.8rem;
+    width: 75%;
+    outline: none;
+    border-bottom: 1px solid var(--header);
+}
+.todoName::placeholder {
+    font-size: larger;
+    color: black;
+}
+.pickDate,
+.pickTime{
+    color: var(--cyan);
+    font-size: 1rem;
+    margin-bottom: 5px;
+}
+.datePicker,
+.timePicker{
+    display: flex;
+}
+.date{
+    border: 1px solid darkcyan;
+    margin-right: 0.5rem;
+    border-radius: 5px;
+}
+.cancelIcon{
+    font-size: 1.5rem;
+    color: rgb(131, 95, 95);
+    position: absolute;
+    top: 5px;
+    right: 10px;
+}
+/* modal end */
