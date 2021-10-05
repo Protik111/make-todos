@@ -69,6 +69,13 @@ body{
 .todosOf__item{
     font-size: 1.2rem;
 }
+.todosOf__item a {
+    text-decoration: none;
+}
+.todosOf__items{
+    display: inline-block;
+    padding-top: 1rem;
+}
 /* sidebar end */
 
 /* modal start */
@@ -136,3 +143,18 @@ body{
     right: 10px;
 }
 /* modal end */
+
+/* Todos List Start */
+.TodosList{
+    background-color: var(--sidebar);
+    height: 100%;
+    width: 30vw;
+    border-radius: 5px;
+    border: 1px solid gray;
+}
+.todoBox{
+    position: absolute;
+    top: 10rem;
+    left: 20rem;
+}
+/* Todos List End */

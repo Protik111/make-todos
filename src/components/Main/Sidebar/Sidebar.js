@@ -9,6 +9,10 @@ import Modal from '../Modal/Modal';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import TimePicker from 'react-time-picker';
+import AllTodos from '../AllTodos/AllTodos';
+import NextSeven from '../NextSeven/NextSeven';
+import Today from '../Today/Today';
+import Status from '../Status/Status';
 // import { TimePicker } from 'antd';
 
 // import { MuiPickersUtilsProvider, DatePicker, TimePicker } from '@material-ui/pickers';
@@ -16,15 +20,34 @@ import TimePicker from 'react-time-picker';
 
 const Sidebar = () => {
     const [showModal, setShowModal] = useState(false);
+    const [todos, setTodos] = useState([]);
     const [name, setName] = useState('');
     const [date, setDate] = useState(new Date());
     const [time, setTime] = useState(null);
+    const [all, setAll] = useState('');
+    // const [next7, setNext7] = useState(false);
+    const [err, setErr] = useState('');
 
-    console.log(name, date, time);
+    // console.log(name, date, time);
 
     const handleSubmit = (e) => {
-        console.log('clicked', e);
+        e.preventDefault();
+        if (time && name) {
+            setTodos([...todos, {
+                names: name,
+                dates: date,
+                times: time
+            }])
+            setErr('');
+            setName('');
+            setTime(null);
+            setShowModal(false)
+        } else {
+            setErr('PLease Provide Name and Time');
+        }
     }
+    console.log('todos', todos);
+
     return (
         <div className="Sidebar">
             <div className="sidebar-box">
@@ -35,18 +58,39 @@ const Sidebar = () => {
                 </div>
                 <hr />
                 <div className="todosOf__item offset-md-3">
-                    <p className="todosOf__item--today"><CgToday className="m-1"></CgToday>today</p>
-                    <p className="todosOf__item--next"><CgCalendarNext className="m-1"></CgCalendarNext>next 7 days</p>
-                    <p className="todosOf__item--all"><FcList className="m-1"></FcList>show all</p>
-                    <p className="todosOf__item--status"><GrStatusInfo className="m-1"></GrStatusInfo>status</p>
-                    {/* <p>{time}</p> */}
+                    <a href="" onClick={(e) => {
+                        setAll('today');
+                        e.preventDefault();
+                    }} className="todosOf__items todosOf__item--today"><CgToday className="m-1"></CgToday>today</a>
+                    <br />
+                    <a href="" onClick={(e) => {
+                        setAll('next7');
+                        e.preventDefault();
+                    }} className="todosOf__items todosOf__item--next"><CgCalendarNext className="m-1"></CgCalendarNext>next 7 days</a>
+                    <br />
+                    <a href="" onClick={(e) => {
+                        setAll('all');
+                        e.preventDefault();
+                    }} className="todosOf__items todosOf__item--all"><FcList className="m-1"></FcList>show all
+                    </a>
+                    <br />
+                    <a href="" onClick={(e) => {
+                        setAll('status');
+                        e.preventDefault();
+                    }} className="todosOf__items todosOf__item--status"><GrStatusInfo className="m-1"></GrStatusInfo>status</a>
+                </div>
+                <div className="todoBox">
+                    {all === 'all' && <AllTodos todos={todos}></AllTodos>}
+                    {all === 'next7' && <NextSeven></NextSeven>}
+                    {all === 'today' && <Today></Today>}
+                    {all === 'status' && <Status></Status>}
                 </div>
                 <Modal showModal={showModal} setShowModal={setShowModal}>
                     <div className="modalBox mt-4">
                         <div className="text-center">
                             <h3>Add A New Todo</h3>
                         </div>
-                        <form action="" className="mt-4" onSubmit={handleSubmit}>
+                        <form className="mt-4" onSubmit={handleSubmit}>
                             <div className="text-center">
                                 <input className="todoName" type="text" name="name" value={name} onChange={e => setName(e.target.value)} placeholder="Enter Todo Name" />
                             </div>
@@ -70,19 +114,20 @@ const Sidebar = () => {
                                         format="h:m: a"
                                         hourPlaceholder="hh"
                                         minutePlaceholder="mm"
-                                        // required={true}
                                         clearIcon=""
                                         className="date"
                                     />
                                 </div>
                             </div>
-                            <div className="text-center mt-2">
-                                {/* <button type="button" className="btn btn-primary add-btn p-2"><GrAdd className="addTodo"></GrAdd>Add To Your List</button> */}
-                                <input type="button" className="btn btn-primary add-btn p-2" value="Add to" />
+                            <div className="text-center">
+                                <input type="submit" value="Add A Todo" class="btn btn-primary add-btn p-2" />
                             </div>
                         </form>
+                        <div className="text-center mt-2">
+                            <p style={{color: 'red'}}>{err}</p>
+                        </div>
                         {/* <p>{time}</p> */}
-                        <a onClick={() => setShowModal(false)}><MdCancel className="cancelIcon"></MdCancel></a>
+                        <a href="#" onClick={() => setShowModal(false)}><MdCancel className="cancelIcon"></MdCancel></a>
                     </div>
                 </Modal>
             </div>
