@@ -21,7 +21,7 @@ const Today = () => {
                 <h3>Today's List : </h3>
             </div>
             {
-                todayTodo.map(todo => <Todo key={todo.id} random={random++} dayNameShow={true} todo={todo}></Todo>)
+                todayTodo.map(todo => <Todo key={todo.id} todayDate={todayDate} random={random++} dayNameShow={true} todo={todo}></Todo>)
             }
         </div>
     );

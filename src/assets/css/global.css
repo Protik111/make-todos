@@ -211,4 +211,29 @@ body{
 .dayName{
     font-weight: 900;
 }
+.alltodosLength{
+    font-weight: 900;
+}
+.dayNameBtn{
+    padding: 0.6rem 2rem;
+    border: none;
+    background-color: #628396;
+    color: white;
+    border-radius: 3px;
+    transition: all 0.2s ease-in-out;
+    /* color: #628396; */
+}
+.dayNameBtn:hover{
+    background-color: var(--header);
+}
 /* Todo End */
+
+/* hidden todo start */
+.hidden {
+    display: none;
+}
+.hiddenUndone{
+    display: block;
+}
+/* hidden todo end */
+

@@ -29,10 +29,7 @@ const Sidebar = () => {
     const [date, setDate] = useState(new Date());
     const [time, setTime] = useState(null);
     const [all, setAll] = useState('');
-    // const [next7, setNext7] = useState(false);
     const [err, setErr] = useState('');
-
-    // console.log(name, date, time);
 
     const handleSubmit = (e) => {
         e.preventDefault();
