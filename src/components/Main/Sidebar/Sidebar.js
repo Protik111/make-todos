@@ -1,26 +1,30 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { FcTodoList, FcList } from 'react-icons/fc';
 import { CgToday, CgCalendarNext } from 'react-icons/cg';
 import { GrStatusInfo, GrAdd } from 'react-icons/gr';
 import { MdDateRange, MdCancel } from 'react-icons/md';
-import Modal from '../Modal/Modal';
+import { AiOutlineFieldTime } from 'react-icons/ai';
 
 //date and time import
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import TimePicker from 'react-time-picker';
+
+//components import
+import Modal from '../Modal/Modal';
 import AllTodos from '../AllTodos/AllTodos';
 import NextSeven from '../NextSeven/NextSeven';
 import Today from '../Today/Today';
 import Status from '../Status/Status';
-// import { TimePicker } from 'antd';
+import moment from 'moment';
+import { TodoContext } from '../../../App';
 
-// import { MuiPickersUtilsProvider, DatePicker, TimePicker } from '@material-ui/pickers';
-// import DateFnsUtils from '@date-io/date-fns';
+let todoId = 0;
 
 const Sidebar = () => {
+    const [todos, setTodos] = useContext(TodoContext);
+
     const [showModal, setShowModal] = useState(false);
-    const [todos, setTodos] = useState([]);
     const [name, setName] = useState('');
     const [date, setDate] = useState(new Date());
     const [time, setTime] = useState(null);
@@ -34,9 +38,12 @@ const Sidebar = () => {
         e.preventDefault();
         if (time && name) {
             setTodos([...todos, {
+                id: todoId++,
                 names: name,
-                dates: date,
-                times: time
+                dates: moment(date).format('DD/MM/YYYY'),
+                times: time,
+                day: moment(date).format('d'),
+                checked: false
             }])
             setErr('');
             setName('');
@@ -48,12 +55,12 @@ const Sidebar = () => {
     }
     console.log('todos', todos);
 
+
     return (
         <div className="Sidebar">
             <div className="sidebar-box">
                 <div className="text-center">
                     <p className="todosOf"><FcTodoList></FcTodoList> Todos Of</p>
-                    {/* <MakeTodoButton></MakeTodoButton> */}
                     <button onClick={() => setShowModal(true)} type="button" class="btn btn-primary add-btn p-2"><GrAdd className="addTodo"></GrAdd>Make A Todo</button>
                 </div>
                 <hr />
@@ -80,9 +87,9 @@ const Sidebar = () => {
                     }} className="todosOf__items todosOf__item--status"><GrStatusInfo className="m-1"></GrStatusInfo>status</a>
                 </div>
                 <div className="todoBox">
-                    {all === 'all' && <AllTodos todos={todos}></AllTodos>}
+                    {all === 'today' && <Today todos={todos}></Today>}
                     {all === 'next7' && <NextSeven></NextSeven>}
-                    {all === 'today' && <Today></Today>}
+                    {all === 'all' && <AllTodos todos={todos}></AllTodos>}
                     {all === 'status' && <Status></Status>}
                 </div>
                 <Modal showModal={showModal} setShowModal={setShowModal}>
@@ -103,7 +110,7 @@ const Sidebar = () => {
                             </div>
 
                             <div className="timePicker">
-                                <p className="m-4 mt-4"><span><MdDateRange className="pickTime"></MdDateRange></span> Pick a Date</p>
+                                <p className="m-4 mt-4"><span><AiOutlineFieldTime className="pickTime"></AiOutlineFieldTime></span> Pick a Time</p>
                                 <div className="text-center mt-4">
                                     <TimePicker
                                         onChange={time => setTime(time)}
@@ -124,7 +131,7 @@ const Sidebar = () => {
                             </div>
                         </form>
                         <div className="text-center mt-2">
-                            <p style={{color: 'red'}}>{err}</p>
+                            <p style={{ color: 'red' }}>{err}</p>
                         </div>
                         {/* <p>{time}</p> */}
                         <a href="#" onClick={() => setShowModal(false)}><MdCancel className="cancelIcon"></MdCancel></a>

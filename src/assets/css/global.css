@@ -158,3 +158,57 @@ body{
     left: 20rem;
 }
 /* Todos List End */
+
+/* Todo Start */
+.Todo{
+    line-height: 1rem;
+}
+.todoItem{
+    display: flex;
+    justify-content: space-between;
+    margin-left: 2rem;
+    margin-top: 15px;
+}
+.tododetail{
+    display: flex;
+    justify-content: space-around;
+    font-size: 0.9rem;
+    color: gray;
+    margin-left: 1.5rem;
+}
+.todoNames{
+    font-size: 1.2rem;
+    color: var(--header);
+}
+.todoIcons{
+    outline: none;
+    font-size: 1.3rem;
+    /* background-color: royalblue; */
+}
+.iconBtn{
+    padding: 1px;
+    margin-left: 1rem;
+    border: none;
+    background: none;
+    transition: all 0.2s ease-in-out;
+}
+.doneBtn:active{
+    background-color: var(--header);
+    padding: 5px;
+
+}
+.todoTimes{
+    color: rgb(209, 206, 206);
+    background:#5b89a3;
+    border: 1px solid gray;
+    border-radius: 3px;
+    height: 1.2rem;
+}
+.checked{
+    width: 100%;
+    text-decoration: line-through;
+}
+.dayName{
+    font-weight: 900;
+}
+/* Todo End */

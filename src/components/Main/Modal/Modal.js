@@ -1,4 +1,6 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 const Modal = ({children, showModal, setShowModal}) => {
     const modalRef = useRef();
@@ -9,9 +11,17 @@ const Modal = ({children, showModal, setShowModal}) => {
         }
     }
 
+    useEffect(() => {
+        AOS.init({
+            offset: 200,
+            duration: 300,
+            easing: 'ease-in-sine',
+        });
+    }, []);
+
     return (
         showModal && 
-        <div className="Modal" ref={modalRef} onClick={closeModal}>
+        <div data-aos="zoom-in" className="Modal" ref={modalRef} onClick={closeModal}>
             <div className="modalContainer">
                 {children}
             </div>

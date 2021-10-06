@@ -1,16 +1,14 @@
 import React from 'react';
+import Todo from '../Todo/Todo';
 
 const AllTodos = ({ todos }) => {
-    // const {names} = props.todos;
-    // console.log('alltodos', names);
-    console.log('alll', todos);
     return (
         <div className="AllTodos TodosList p-4">
-            <div className="text-center">
+            <div className="text-center mb-4">
                 <h3>Your Todos List :</h3>
             </div>
             {
-                todos.map(todo => <li>{todo.names}</li>)
+                todos.map(todo => <Todo key={todo.id} todo={todo}></Todo>)
             }
         </div>
     );
