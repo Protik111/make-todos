@@ -15,9 +15,10 @@ import Modal from '../Modal/Modal';
 import AllTodos from '../AllTodos/AllTodos';
 import NextSeven from '../NextSeven/NextSeven';
 import Today from '../Today/Today';
-import Status from '../Status/Status';
 import moment from 'moment';
 import { TodoContext } from '../../../App';
+import Completed from '../Completed/Completed';
+import Uncompleted from '../Uncompleted/Uncompleted';
 
 let todoId = 0;
 
@@ -30,6 +31,8 @@ const Sidebar = () => {
     const [time, setTime] = useState(null);
     const [all, setAll] = useState('');
     const [err, setErr] = useState('');
+    const [completed, setCompleted] = useState('');
+
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -52,6 +55,18 @@ const Sidebar = () => {
     }
     console.log('todos', todos);
 
+    const handleOption = (e) => {
+        console.log(e.target.value);
+        if(e.target.value === 'alls'){
+            setCompleted('alls');
+        }if(e.target.value === 'completed'){
+            setCompleted('completed');
+        }if(e.target.value === 'uncompleted'){
+            setCompleted('uncompleted');
+        }
+        // setTodos(todos.filter(todo => todo.checked === true));
+    }
+
 
     return (
         <div className="Sidebar">
@@ -64,16 +79,19 @@ const Sidebar = () => {
                 <div className="todosOf__item offset-md-3">
                     <a href="" onClick={(e) => {
                         setAll('today');
+                        setCompleted('');
                         e.preventDefault();
                     }} className="todosOf__items todosOf__item--today"><CgToday className="m-1"></CgToday>today</a>
                     <br />
                     <a href="" onClick={(e) => {
                         setAll('next7');
+                        setCompleted('');
                         e.preventDefault();
                     }} className="todosOf__items todosOf__item--next"><CgCalendarNext className="m-1"></CgCalendarNext>next 7 days</a>
                     <br />
                     <a href="" onClick={(e) => {
                         setAll('all');
+                        setCompleted('');
                         e.preventDefault();
                     }} className="todosOf__items todosOf__item--all"><FcList className="m-1"></FcList>show all
                     </a>
@@ -87,7 +105,25 @@ const Sidebar = () => {
                     {all === 'today' && <Today todos={todos}></Today>}
                     {all === 'next7' && <NextSeven todos={todos}></NextSeven>}
                     {all === 'all' && <AllTodos todos={todos}></AllTodos>}
-                    {all === 'status' && <Status></Status>}
+                    {all === 'status' &&
+                        <div className="text-center TodosList p-4">
+                            <select name="" id="done" onChange={handleOption}>
+                                <option value="">Please choose an option</option>
+                                <option value="alls">all</option>
+                                <option value="completed">completed</option>
+                                <option value="uncompleted">uncompleted</option>
+                            </select>
+                        </div>
+                    }
+                    {
+                        completed === 'alls' && <AllTodos todos={todos}></AllTodos>
+                    }
+                    {
+                        completed === 'completed' && <Completed todos={todos}></Completed>
+                    }
+                    {
+                        completed === 'uncompleted' && <Uncompleted todos={todos}></Uncompleted>
+                    }
                 </div>
                 <Modal showModal={showModal} setShowModal={setShowModal}>
                     <div className="modalBox mt-4">

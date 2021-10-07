@@ -6,7 +6,7 @@ import { TodoContext } from '../../../App';
 
 let dayName = '';
 
-const Todo = ({ todo, setTodo, dayNameShow, random, todayDate}) => {
+const Todo = ({ todo, setTodo, dayNameShow, random, todayDate, status, setStatus, statusCount }) => {
 
     const [todos, setTodos] = useContext(TodoContext);
     const [check, setCheck] = useState(false);
@@ -20,8 +20,16 @@ const Todo = ({ todo, setTodo, dayNameShow, random, todayDate}) => {
         handleLength();
     }, [todos]);
 
-    const handleCheck = () => {
+    const handleCheck = (id) => {
         setCheck(!check);
+        console.log(id);
+        setTodos(todos.map(item => {
+            if (item.id === id) {
+                return { ...item, checked: !item.checked }
+            };
+            return item;
+        }))
+        console.log('checked', todos.checked);
     }
     const handleDelete = (id) => {
         setTodos(todos.filter(tds => tds.id !== id));
@@ -57,7 +65,7 @@ const Todo = ({ todo, setTodo, dayNameShow, random, todayDate}) => {
                     <h4 className="dayName"><FcCalendar style={{ marginBottom: '2px', marginRight: '5px' }}></FcCalendar>{dayName} - <span>({todoLength.length})</span></h4>
                 </div>
             }
-            
+
             <div className="todoItem">
                 <div>
                     <p className={`todoNames ${check ? 'checked' : ''}`}>{todo.names}</p>
@@ -65,7 +73,7 @@ const Todo = ({ todo, setTodo, dayNameShow, random, todayDate}) => {
                 <div className="todoIconBox">
                     <button data-toggle="tooltip" data-placement="top" title="Edit" className="iconBtn"><FcEditImage className="todoIcons"></FcEditImage></button>
 
-                    <button onClick={handleCheck} data-toggle="tooltip" data-placement="top" title="Done" className="iconBtn doneBtn">{!check && <FcCheckmark className="todoIcons"></FcCheckmark>}</button>
+                    <button onClick={() => handleCheck(todo.id)} data-toggle="tooltip" data-placement="top" title="Done" className="iconBtn doneBtn">{!check && <FcCheckmark className="todoIcons"></FcCheckmark>}</button>
 
                     <button onClick={() => handleDelete(todo.id)} data-toggle="tooltip" data-placement="top" title="Delete" className="iconBtn"><AiFillDelete className="todoIcons"></AiFillDelete></button>
                 </div>
