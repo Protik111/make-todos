@@ -237,3 +237,13 @@ body{
 }
 /* hidden todo end */
 
+/* next seven days start*/
+.day{
+    display: flex;
+}
+.name{
+    font-weight: 900;
+}
+/* next seven days end*/
+
+

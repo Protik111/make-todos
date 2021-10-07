@@ -41,7 +41,7 @@ const Sidebar = () => {
                 times: time,
                 day: moment(date).format('d'),
                 checked: false
-            }])
+            }]);
             setErr('');
             setName('');
             setTime(null);
@@ -85,7 +85,7 @@ const Sidebar = () => {
                 </div>
                 <div className="todoBox">
                     {all === 'today' && <Today todos={todos}></Today>}
-                    {all === 'next7' && <NextSeven></NextSeven>}
+                    {all === 'next7' && <NextSeven todos={todos}></NextSeven>}
                     {all === 'all' && <AllTodos todos={todos}></AllTodos>}
                     {all === 'status' && <Status></Status>}
                 </div>
