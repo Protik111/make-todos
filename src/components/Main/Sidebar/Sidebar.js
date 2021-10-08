@@ -4,6 +4,7 @@ import { CgToday, CgCalendarNext } from 'react-icons/cg';
 import { GrStatusInfo, GrAdd } from 'react-icons/gr';
 import { MdDateRange, MdCancel } from 'react-icons/md';
 import { AiOutlineFieldTime } from 'react-icons/ai';
+import { BsListUl } from 'react-icons/bs';
 
 //date and time import
 import DatePicker from "react-datepicker";
@@ -32,21 +33,7 @@ const Sidebar = () => {
     const [all, setAll] = useState('');
     const [err, setErr] = useState('');
     const [completed, setCompleted] = useState('');
-
-
-    // useEffect(() => {
-    //     getFromLocal();
-    //   }, []);
-
-    // const getFromLocal = () => {
-    //     if (localStorage.getItem('todos') === null) {
-    //         localStorage.setItem('todos', JSON.stringify([]));
-    //     } else {
-    //         let localTodos = JSON.parse(localStorage.getItem('todos'));
-    //         // setTodos(localTodos);
-    //         // console.log('todos from local', todos)
-    //     }
-    // }
+    const [activeButton, setActiveButton] = useState(null);
 
 
     const handleSubmit = (e) => {
@@ -83,6 +70,20 @@ const Sidebar = () => {
         // setTodos(todos.filter(todo => todo.checked === true));
     }
 
+    const handleActiveButton = (e) => {
+        // console.log(e);
+        // setActiveButton(e);
+        if(e === 'today'){
+            setActiveButton(e)
+        }if(e === 'next7'){
+            setActiveButton(e);
+        }if(e === 'showAll'){
+            setActiveButton(e);
+        }if(e === 'status'){
+            setActiveButton(e);
+        }
+    }
+
 
     return (
         <div className="Sidebar">
@@ -97,25 +98,29 @@ const Sidebar = () => {
                         setAll('today');
                         setCompleted('');
                         e.preventDefault();
-                    }} className="todosOf__items todosOf__item--today"><CgToday className="m-1"></CgToday>today</a>
+                        handleActiveButton('today');
+                    }} className={`p-3 todosOf__items todosOf__item--today ${activeButton === 'today' ? 'activeButtonStyle' : ''}`}><CgToday className="m-1"></CgToday>today</a>
                     <br />
                     <a href="" onClick={(e) => {
                         setAll('next7');
                         setCompleted('');
                         e.preventDefault();
-                    }} className="todosOf__items todosOf__item--next"><CgCalendarNext className="m-1"></CgCalendarNext>next 7 days</a>
+                        handleActiveButton('next7');
+                    }} className={`p-3 todosOf__items todosOf__item--next ${activeButton === 'next7' ? 'activeButtonStyle' : ''}`}><CgCalendarNext className="m-1"></CgCalendarNext>next 7 days</a>
                     <br />
                     <a href="" onClick={(e) => {
                         setAll('all');
                         setCompleted('');
                         e.preventDefault();
-                    }} className="todosOf__items todosOf__item--all"><FcList className="m-1"></FcList>show all
+                        handleActiveButton('showAll');
+                    }} className={`p-3 todosOf__items todosOf__item--all ${activeButton === 'showAll' ? 'activeButtonStyle' : ''}`}><BsListUl className="m-1"></BsListUl>show all
                     </a>
                     <br />
                     <a href="" onClick={(e) => {
                         setAll('status');
                         e.preventDefault();
-                    }} className="todosOf__items todosOf__item--status"><GrStatusInfo className="m-1"></GrStatusInfo>status</a>
+                        handleActiveButton('status');
+                    }} className={`p-3 todosOf__items todosOf__item--status ${activeButton === 'status' ? 'activeButtonStyle' : ''}`}><GrStatusInfo className="m-1"></GrStatusInfo>status</a>
                 </div>
                 <div className="todoBox">
                     {all === 'today' && <Today todos={todos}></Today>}

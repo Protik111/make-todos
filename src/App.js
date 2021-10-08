@@ -5,34 +5,22 @@ import Main from './components/Main/Main';
 
 export const TodoContext = createContext();
 
+const getTodosLocal = () => {
+  const todo = sessionStorage.getItem('todos');
+  if(todo){
+    return JSON.parse(sessionStorage.getItem('todos'));
+  } else{
+    return [];
+  }
+}
+
 function App() {
-  const [todos, setTodos] = useState([]);
+  const [todos, setTodos] = useState(getTodosLocal());
 
 
-  // useEffect(() => {
-  //   saveToLocal();
-  // }, [todos]);
-
-  // useEffect(() => {
-  //   getFromLocal();
-  // }, []);
-
-
-  // const saveToLocal = () => {
-  //   localStorage.setItem('todos', JSON.stringify(todos));
-  // }
-
-  // const getFromLocal = () => {
-  // if (localStorage.getItem('todos') === null) {
-  //   localStorage.setItem('todos', JSON.stringify(todos));
-  // } else {
-  //   let localTodos = JSON.parse(localStorage.getItem('todos'));
-  //   setTodos(localTodos);
-  //   console.log('todos from local', todos)
-  // }
-  // let localTodos = JSON.parse(localStorage.getItem('todos'));
-  // setTodos(localTodos);
-  // }
+  useEffect(() => {
+    sessionStorage.setItem('todos', JSON.stringify(todos));
+  }, [todos]);
   
   return (
     <TodoContext.Provider value={[todos, setTodos]}>

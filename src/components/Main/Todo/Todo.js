@@ -83,7 +83,7 @@ const Todo = ({ todo, setTodo, dayNameShow, random, todayDate, checked }) => {
                     <p><MdDateRange></MdDateRange>{todo.dates}</p>
                 </div>
                 <div className="todoTimes">
-                    <p><AiOutlineFieldTime></AiOutlineFieldTime>{todo.times}</p>
+                    <p><AiOutlineFieldTime></AiOutlineFieldTime>{todo.times === 'Invalid date' ? 'Invalid Time' : todo.times}</p>
                 </div>
             </div>
         </div>
