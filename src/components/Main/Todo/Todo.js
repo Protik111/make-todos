@@ -6,11 +6,20 @@ import { TodoContext } from '../../../App';
 
 let dayName = '';
 
-const Todo = ({ todo, setTodo, dayNameShow, random, todayDate, status, setStatus, statusCount }) => {
+const Todo = ({ todo, setTodo, dayNameShow, random, todayDate, checked }) => {
 
+    const time = todo.times;
+    // console.log('alltimes', time);
+    const [meridiem, setMeridiem] = useState('AM');
     const [todos, setTodos] = useContext(TodoContext);
     const [check, setCheck] = useState(false);
     const [todoLength, setTodoLength] = useState([]);
+
+    useEffect(() => {
+        if(time>'12'){
+            setMeridiem('PM');
+        }
+    }, [time]);
 
     const handleLength = () => {
         setTodoLength(todos.filter(tds => tds.dates === todayDate));
@@ -68,12 +77,12 @@ const Todo = ({ todo, setTodo, dayNameShow, random, todayDate, status, setStatus
 
             <div className="todoItem">
                 <div>
-                    <p className={`todoNames ${check ? 'checked' : ''}`}>{todo.names}</p>
+                    <p className={`todoNames ${checked === true ? 'checked' : ''}`}>{todo.names}</p>
                 </div>
                 <div className="todoIconBox">
                     <button data-toggle="tooltip" data-placement="top" title="Edit" className="iconBtn"><FcEditImage className="todoIcons"></FcEditImage></button>
 
-                    <button onClick={() => handleCheck(todo.id)} data-toggle="tooltip" data-placement="top" title="Done" className="iconBtn doneBtn">{!check && <FcCheckmark className="todoIcons"></FcCheckmark>}</button>
+                    <button onClick={() => handleCheck(todo.id)} data-toggle="tooltip" data-placement="top" title="Done" className="iconBtn doneBtn">{!checked && <FcCheckmark className="todoIcons"></FcCheckmark>}</button>
 
                     <button onClick={() => handleDelete(todo.id)} data-toggle="tooltip" data-placement="top" title="Delete" className="iconBtn"><AiFillDelete className="todoIcons"></AiFillDelete></button>
                 </div>
@@ -83,7 +92,7 @@ const Todo = ({ todo, setTodo, dayNameShow, random, todayDate, status, setStatus
                     <p><MdDateRange></MdDateRange>{todo.dates}</p>
                 </div>
                 <div className="todoTimes">
-                    <p><AiOutlineFieldTime></AiOutlineFieldTime>{todo.times}</p>
+                    <p><AiOutlineFieldTime></AiOutlineFieldTime>{todo.times}{meridiem}</p>
                 </div>
             </div>
         </div>

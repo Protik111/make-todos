@@ -10,10 +10,10 @@ const Completed = ({todos}) => {
     return (
         <div className="Completed TodosList p-4">
             <div className="text-center">
-                <h3>Completed List : </h3>
+                <h3>Completed List : <bold className="alltodosLength">({filterredTodos.length})</bold></h3>
             </div>
             {
-                filterredTodos.map(todo => <Todo key={todo.id} todo={todo}></Todo>)
+                filterredTodos.map(todo => <Todo checked={todo.checked} key={todo.id} todo={todo}></Todo>)
             }
         </div>
     );

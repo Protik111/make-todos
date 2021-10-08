@@ -41,7 +41,7 @@ function NextSeven({ todos }) {
                         <div className='todos'>
                             {
                                 day.todos.map(todo =>
-                                    <Todo key={todo.id} todo={todo} />
+                                    <Todo checked={todo.checked} key={todo.id} todo={todo} />
                                 )
                             }
                         </div>

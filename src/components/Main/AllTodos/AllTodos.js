@@ -10,7 +10,7 @@ const AllTodos = () => {
                 <h3>Your Todos List : <bold className="alltodosLength">({todos.length})</bold></h3>
             </div>
             {
-                todos.map(todo => <Todo key={todo.id} todo={todo}></Todo>)
+                todos.map(todo => <Todo checked={todo.checked} key={todo.id} todo={todo}></Todo>)
             }
         </div>
     );

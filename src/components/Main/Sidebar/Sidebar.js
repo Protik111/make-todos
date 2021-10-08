@@ -28,7 +28,7 @@ const Sidebar = () => {
     const [showModal, setShowModal] = useState(false);
     const [name, setName] = useState('');
     const [date, setDate] = useState(new Date());
-    const [time, setTime] = useState(null);
+    const [time, setTime] = useState(new Date("01/01/2021 08:30 AM"));
     const [all, setAll] = useState('');
     const [err, setErr] = useState('');
     const [completed, setCompleted] = useState('');
@@ -48,7 +48,7 @@ const Sidebar = () => {
             setErr('');
             setName('');
             setTime(null);
-            setShowModal(false)
+            setShowModal(false);
         } else {
             setErr('PLease Provide Name and Time');
         }
@@ -57,11 +57,11 @@ const Sidebar = () => {
 
     const handleOption = (e) => {
         console.log(e.target.value);
-        if(e.target.value === 'alls'){
+        if (e.target.value === 'alls') {
             setCompleted('alls');
-        }if(e.target.value === 'completed'){
+        } if (e.target.value === 'completed') {
             setCompleted('completed');
-        }if(e.target.value === 'uncompleted'){
+        } if (e.target.value === 'uncompleted') {
             setCompleted('uncompleted');
         }
         // setTodos(todos.filter(todo => todo.checked === true));
@@ -107,7 +107,7 @@ const Sidebar = () => {
                     {all === 'all' && <AllTodos todos={todos}></AllTodos>}
                     {all === 'status' &&
                         <div className="text-center TodosList p-4">
-                            <select name="" id="done" onChange={handleOption}>
+                            <select name="" id="done" onChange={handleOption} className="form-select" aria-label="Default select example">
                                 <option value="">Please choose an option</option>
                                 <option value="alls">all</option>
                                 <option value="completed">completed</option>
