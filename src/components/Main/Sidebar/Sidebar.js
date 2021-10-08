@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { FcTodoList, FcList } from 'react-icons/fc';
 import { CgToday, CgCalendarNext } from 'react-icons/cg';
 import { GrStatusInfo, GrAdd } from 'react-icons/gr';
@@ -28,10 +28,25 @@ const Sidebar = () => {
     const [showModal, setShowModal] = useState(false);
     const [name, setName] = useState('');
     const [date, setDate] = useState(new Date());
-    const [time, setTime] = useState(new Date("01/01/2021 08:30 AM"));
+    const [time, setTime] = useState('');
     const [all, setAll] = useState('');
     const [err, setErr] = useState('');
     const [completed, setCompleted] = useState('');
+
+
+    // useEffect(() => {
+    //     getFromLocal();
+    //   }, []);
+
+    // const getFromLocal = () => {
+    //     if (localStorage.getItem('todos') === null) {
+    //         localStorage.setItem('todos', JSON.stringify([]));
+    //     } else {
+    //         let localTodos = JSON.parse(localStorage.getItem('todos'));
+    //         // setTodos(localTodos);
+    //         // console.log('todos from local', todos)
+    //     }
+    // }
 
 
     const handleSubmit = (e) => {
@@ -41,10 +56,11 @@ const Sidebar = () => {
                 id: todoId++,
                 names: name,
                 dates: moment(date).format('DD/MM/YYYY'),
-                times: time,
+                times: moment(time, "HH:mm:ss").format('hh:mm a'),
                 day: moment(date).format('d'),
                 checked: false
             }]);
+            // getFromLocal();
             setErr('');
             setName('');
             setTime(null);

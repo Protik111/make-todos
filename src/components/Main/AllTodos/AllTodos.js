@@ -1,9 +1,10 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { TodoContext } from '../../../App';
 import Todo from '../Todo/Todo';
 
 const AllTodos = () => {
     const [todos, setTodos] = useContext(TodoContext);
+
     return (
         <div className="AllTodos TodosList p-4">
             <div className="text-center mb-4">

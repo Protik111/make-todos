@@ -8,18 +8,9 @@ let dayName = '';
 
 const Todo = ({ todo, setTodo, dayNameShow, random, todayDate, checked }) => {
 
-    const time = todo.times;
-    // console.log('alltimes', time);
-    const [meridiem, setMeridiem] = useState('AM');
     const [todos, setTodos] = useContext(TodoContext);
     const [check, setCheck] = useState(false);
     const [todoLength, setTodoLength] = useState([]);
-
-    useEffect(() => {
-        if(time>'12'){
-            setMeridiem('PM');
-        }
-    }, [time]);
 
     const handleLength = () => {
         setTodoLength(todos.filter(tds => tds.dates === todayDate));
@@ -92,7 +83,7 @@ const Todo = ({ todo, setTodo, dayNameShow, random, todayDate, checked }) => {
                     <p><MdDateRange></MdDateRange>{todo.dates}</p>
                 </div>
                 <div className="todoTimes">
-                    <p><AiOutlineFieldTime></AiOutlineFieldTime>{todo.times}{meridiem}</p>
+                    <p><AiOutlineFieldTime></AiOutlineFieldTime>{todo.times}</p>
                 </div>
             </div>
         </div>
