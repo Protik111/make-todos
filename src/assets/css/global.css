@@ -1,89 +1,117 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
-@import url("https://cdn.syncfusion.com/ej2/material.css");
-
-:root{
-    --header: #29404D;
+:root {
+    --header: #52768b;
     --sidebar: rgb(223, 217, 217);
     --cyan: darkcyan;
 }
 
 *,
 *::after,
-*::before{
+*::before {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
-body{
+
+body {
     font-family: 'Open Sans', sans-serif;
     /* font-size: 62.5%; */
-}
-.App{
-    width: 100%;
-    height: 100vh;
-    /* display: flex; */
-    /* overflow: hidden; */
+    overflow-x: hidden;
 }
 
+.App {
+    width: 100%;
+    height: 100vh;
+}
+
+
 /* header start */
-.Header{
-    background-color: var(--header);
-    color:white;
+
+.Header {
+    background-color: #52768b;
+    color: white;
     line-height: 1.2rem;
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.logo-box .logo{
+
+.logo-box .logo {
     font-size: 2.5rem;
-    /* text-transform: uppercase; */
     padding-top: 1.2rem;
     font-weight: 500;
 }
+
 .slogan {
     font-size: 1rem;
     padding: 0.5rem 0 0 1rem;
 }
+
+
 /* header end */
 
 
 /* main start */
-.Main{
+
+.Main {
     display: flex;
 }
+
+
 /* main end */
 
 
 /* sidebar start */
-.Sidebar{
+
+.Sidebar {
     background-color: var(--sidebar);
     height: 100vh;
     width: 20%;
 }
-.sidebar-box{
+
+.sidebar-box {
     /* text-align: center; */
     padding-top: 1rem;
 }
-.todosOf{
+
+.todosOf {
     font-size: 1.5rem;
 }
-.todosOf__item{
+
+.todosOf__item {
     font-size: 1.2rem;
 }
+
 .todosOf__item a {
     text-decoration: none;
 }
-.todosOf__items{
+
+.todosOf__items {
     display: inline-block;
     padding-top: 1rem;
 }
+
+
 /* sidebar end */
 
+
 /* modal start */
-.add-btn{
+
+.add-btn {
     width: 10rem;
+    height: 3.5rem;
+    background-color: #52768b;
+    color: white;
+    /* font-family: arial; */
 }
-.Modal{
+
+.submit-btn {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+.Modal {
     position: fixed;
     top: 0;
     left: 0;
@@ -103,119 +131,149 @@ body{
     /* text-align: center; */
     border-radius: 7px;
 }
-.todoName{
+
+.todoName {
     width: 70%;
-    padding: 0.6rem 0;
+    padding: .9rem 0;
     font-size: 0.7rem;
     border: none;
     border-bottom: 1px solid var(--header);
     transition: all 0.3s ease-in-out;
 }
+
 .modalBox input:focus {
     font-size: 0.8rem;
     width: 75%;
     outline: none;
     border-bottom: 1px solid var(--header);
 }
+
 .todoName::placeholder {
     font-size: larger;
     color: black;
 }
+
 .pickDate,
-.pickTime{
-    color: var(--cyan);
+.pickTime {
+    color: var(--header);
     font-size: 1rem;
     margin-bottom: 5px;
 }
+
 .datePicker,
-.timePicker{
+.timePicker {
     display: flex;
 }
-.date{
-    border: 1px solid darkcyan;
+
+.date {
+    border: 1px solid var(--header);
     margin-right: 0.5rem;
     border-radius: 5px;
 }
-.cancelIcon{
+
+.cancelIcon {
     font-size: 1.5rem;
     color: rgb(131, 95, 95);
     position: absolute;
     top: 5px;
     right: 10px;
 }
+
+
 /* modal end */
 
+
 /* Todos List Start */
-.TodosList{
+
+.TodosList {
     background-color: var(--sidebar);
     height: 100%;
     width: 30vw;
     border-radius: 5px;
     border: 1px solid gray;
 }
-.todoBox{
+
+.todoBox {
     position: absolute;
     top: 10rem;
     left: 20rem;
 }
+
+
 /* Todos List End */
 
+
 /* Todo Start */
-.Todo{
+
+.Todo {
     line-height: 1rem;
 }
-.todoItem{
+
+.todoItem {
     display: flex;
     justify-content: space-between;
     margin-left: 2rem;
     margin-top: 15px;
 }
-.tododetail{
+
+.tododetail {
     display: flex;
     justify-content: space-around;
     font-size: 0.9rem;
     color: gray;
     margin-left: 1.5rem;
 }
-.todoNames{
+
+.todoNames {
     font-size: 1.2rem;
-    color: var(--header);
+    color: black;
 }
-.todoIcons{
+
+.todoIcons {
     outline: none;
     font-size: 1.3rem;
     /* background-color: royalblue; */
 }
-.iconBtn{
+
+.doneIcon {
+    fill: var(--header);
+}
+
+.iconBtn {
     padding: 1px;
     margin-left: 1rem;
     border: none;
     background: none;
     transition: all 0.2s ease-in-out;
 }
-.doneBtn:active{
+
+.doneBtn:active {
     background-color: var(--header);
     padding: 5px;
-
 }
-.todoTimes{
+
+.todoTimes {
     color: rgb(209, 206, 206);
-    background:#5b89a3;
+    background: var(--header);
     border: 1px solid gray;
     border-radius: 3px;
     height: 1.2rem;
 }
-.checked{
+
+.checked {
     width: 100%;
     text-decoration: line-through;
 }
-.dayName{
+
+.dayName {
     font-weight: 900;
 }
-.alltodosLength{
+
+.alltodosLength {
     font-weight: 900;
 }
-.dayNameBtn{
+
+.dayNameBtn {
     padding: 0.6rem 2rem;
     border: none;
     background-color: #628396;
@@ -224,80 +282,203 @@ body{
     transition: all 0.2s ease-in-out;
     /* color: #628396; */
 }
-.dayNameBtn:hover{
+
+.dayNameBtn:hover {
     background-color: var(--header);
 }
+
+
 /* Todo End */
 
+
 /* hidden todo start */
+
 .hidden {
     display: none;
 }
-.hiddenUndone{
+
+.hiddenUndone {
     display: block;
 }
+
+
 /* hidden todo end */
 
+
 /* next seven days start*/
-.day{
+
+.day {
     display: flex;
 }
-.name{
+
+.name {
     font-weight: 900;
 }
-.activeButtonStyle{
-    background-color: #799AAE;
-    color: white;
-    
+
+.error {
+    position: absolute;
+    left: 15%;
+    bottom: 3rem;
 }
 
+.activeButtonStyle {
+    background-color: #52768b;
+    color: white;
+}
 
-
-a{
+a {
     z-index: 100;
     display: block;
-    /* width: 180px; */
-    /* height: 60px; */
-    /* line-height: 46px; */
     text-decoration: none;
     text-align: center;
-    color: var(--header);
-    border-radius: 10px;
-    /* font-size: 20px; */
+    color: black;
+    border-radius: 5px;
     font-family: arial;
     position: relative;
     overflow: hidden;
     background: transparent;
-    /* text-transform: uppercase; */
     transition: all .35s;
-  }
-  
-  a:before,
-  a:after{
+}
+
+a:before,
+a:after {
     position: absolute;
     content: "";
     width: 100%;
     height: 100%;
     top: -100%;
     left: 0;
-    background: #658fcf;
+    background-color: #799AAE;
     z-index: -1;
     transition: all .35s;
-  }
-  
-  a:before{
+}
+
+a:before {
     opacity: .5;
-  }
-  
-  a:after{
+}
+
+a:after {
     transition-delay: .2s;
-  }
-  
-  a:hover{
+}
+
+a:hover {
     color: #fff;
-  }
-  
-  a:hover:before,
-  a:hover:after{
+}
+
+a:hover:before,
+a:hover:after {
     top: 0;
-  }
+}
+
+
+/* media query */
+
+
+@media (max-width: 876px) {
+    .Main{
+        position: relative;
+    }
+    .Sidebar {
+        min-height: 100%;
+        width: 100%;
+        position: absolute;
+        top: auto;
+        left: 50%;
+        text-align: center;
+        transform: translate(-50%, 0%);
+        flex-direction: column;
+    }
+    .todosOf__item {
+        width: 100%;
+        position: absolute;
+        /* left: 25%; */
+        /* left: -17%; */
+        top: auto;
+    }
+    .todoBox-container{
+        position: relative;
+    }
+    .todoBox{
+        width: 100%;
+        position: absolute;
+        top: 25rem;
+        left: auto;
+    }
+    .Today,
+    .NextSeven,
+    .AllTodos,
+    .Completed,
+    .Uncompleted,
+    .TodosList{
+        min-width: 100%;
+        margin-bottom: 2rem;
+    }
+
+    .submit-btn {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+    }
+
+    .Modal {
+        z-index: 5000;
+        position: fixed;
+        top: 0;
+        left: 0;
+        background-color: rgba(0, 0, 0, 0.8);
+        height: 100%;
+        width: 100%;
+    }
+
+    .Modal .modalContainer {
+        position: absolute;
+        top: 25%;
+        left: 50%;
+        transform: translate(-50%, 0%);
+        background-color: white;
+        width: 100%;
+        height: 55vh;
+        border-radius: 7px;
+    }
+}
+
+ @media (max-width: 1042px) {
+
+    a{
+        font-size: 1rem;
+    }
+    .Today,
+    .NextSeven,
+    .AllTodos,
+    .Completed,
+    .Uncompleted,
+    .TodosList{
+        width: 22rem;
+        margin-bottom: 2rem;
+    }
+    .submit-btn {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+    }
+
+    .Modal {
+        z-index: 5000;
+        position: fixed;
+        top: 0;
+        left: 0;
+        background-color: rgba(0, 0, 0, 0.8);
+        height: 100%;
+        width: 100%;
+    }
+    .Modal .modalContainer {
+        position: absolute;
+        top: 25%;
+        left: 50%;
+        transform: translate(-50%, 0%);
+        background-color: white;
+        width: 90%;
+        height: 75vh;
+        border-radius: 7px;
+    }
+}

@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { MdDateRange } from 'react-icons/md';
+import { MdRadioButtonUnchecked, MdRadioButtonChecked } from 'react-icons/md';
 import { AiOutlineFieldTime, AiFillDelete } from 'react-icons/ai';
 import { FcEditImage, FcCheckmark, FcCalendar } from 'react-icons/fc';
 import { TodoContext } from '../../../App';
@@ -73,9 +74,9 @@ const Todo = ({ todo, setTodo, dayNameShow, random, todayDate, checked }) => {
                 <div className="todoIconBox">
                     <button data-toggle="tooltip" data-placement="top" title="Edit" className="iconBtn"><FcEditImage className="todoIcons"></FcEditImage></button>
 
-                    <button onClick={() => handleCheck(todo.id)} data-toggle="tooltip" data-placement="top" title="Done" className="iconBtn doneBtn">{!checked && <FcCheckmark className="todoIcons"></FcCheckmark>}</button>
+                    <button onClick={() => handleCheck(todo.id)} data-toggle="tooltip" data-placement="top" title="Done" className="iconBtn doneBtn">{!checked ? <MdRadioButtonUnchecked className="todoIcons"></MdRadioButtonUnchecked> : <MdRadioButtonChecked className="todoIcons doneIcon"></MdRadioButtonChecked>}</button>
 
-                    <button onClick={() => handleDelete(todo.id)} data-toggle="tooltip" data-placement="top" title="Delete" className="iconBtn"><AiFillDelete className="todoIcons"></AiFillDelete></button>
+                    <button onClick={() => handleDelete(todo.id)} data-toggle="tooltip" data-placement="top" title="Delete" className="iconBtn"><AiFillDelete className="todoIcons" style={{color: 'rgb(209, 19, 19)'}}></AiFillDelete></button>
                 </div>
             </div>
             <div className="tododetail">

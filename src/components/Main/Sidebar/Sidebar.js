@@ -71,15 +71,13 @@ const Sidebar = () => {
     }
 
     const handleActiveButton = (e) => {
-        // console.log(e);
-        // setActiveButton(e);
-        if(e === 'today'){
+        if (e === 'today') {
             setActiveButton(e)
-        }if(e === 'next7'){
+        } if (e === 'next7') {
             setActiveButton(e);
-        }if(e === 'showAll'){
+        } if (e === 'showAll') {
             setActiveButton(e);
-        }if(e === 'status'){
+        } if (e === 'status') {
             setActiveButton(e);
         }
     }
@@ -90,61 +88,68 @@ const Sidebar = () => {
             <div className="sidebar-box">
                 <div className="text-center">
                     <p className="todosOf"><FcTodoList></FcTodoList> Todos Of</p>
-                    <button onClick={() => setShowModal(true)} type="button" class="btn btn-primary add-btn p-2"><GrAdd className="addTodo"></GrAdd>Make A Todo</button>
+                    <button onClick={() => {
+                        setShowModal(true);
+                        setActiveButton(null);
+                        setAll('');
+                    }} type="button" class="btn add-btn p-2"><GrAdd className="addTodo"></GrAdd>Make A Todo</button>
                 </div>
                 <hr />
-                <div className="todosOf__item offset-md-3">
-                    <a href="" onClick={(e) => {
-                        setAll('today');
-                        setCompleted('');
-                        e.preventDefault();
-                        handleActiveButton('today');
-                    }} className={`p-3 todosOf__items todosOf__item--today ${activeButton === 'today' ? 'activeButtonStyle' : ''}`}><CgToday className="m-1"></CgToday>today</a>
-                    <br />
-                    <a href="" onClick={(e) => {
-                        setAll('next7');
-                        setCompleted('');
-                        e.preventDefault();
-                        handleActiveButton('next7');
-                    }} className={`p-3 todosOf__items todosOf__item--next ${activeButton === 'next7' ? 'activeButtonStyle' : ''}`}><CgCalendarNext className="m-1"></CgCalendarNext>next 7 days</a>
-                    <br />
-                    <a href="" onClick={(e) => {
-                        setAll('all');
-                        setCompleted('');
-                        e.preventDefault();
-                        handleActiveButton('showAll');
-                    }} className={`p-3 todosOf__items todosOf__item--all ${activeButton === 'showAll' ? 'activeButtonStyle' : ''}`}><BsListUl className="m-1"></BsListUl>show all
-                    </a>
-                    <br />
-                    <a href="" onClick={(e) => {
-                        setAll('status');
-                        e.preventDefault();
-                        handleActiveButton('status');
-                    }} className={`p-3 todosOf__items todosOf__item--status ${activeButton === 'status' ? 'activeButtonStyle' : ''}`}><GrStatusInfo className="m-1"></GrStatusInfo>status</a>
-                </div>
-                <div className="todoBox">
-                    {all === 'today' && <Today todos={todos}></Today>}
-                    {all === 'next7' && <NextSeven todos={todos}></NextSeven>}
-                    {all === 'all' && <AllTodos todos={todos}></AllTodos>}
-                    {all === 'status' &&
-                        <div className="text-center TodosList p-4">
-                            <select name="" id="done" onChange={handleOption} className="form-select" aria-label="Default select example">
-                                <option value="">Please choose an option</option>
-                                <option value="alls">all</option>
-                                <option value="completed">completed</option>
-                                <option value="uncompleted">uncompleted</option>
-                            </select>
-                        </div>
-                    }
-                    {
-                        completed === 'alls' && <AllTodos todos={todos}></AllTodos>
-                    }
-                    {
-                        completed === 'completed' && <Completed todos={todos}></Completed>
-                    }
-                    {
-                        completed === 'uncompleted' && <Uncompleted todos={todos}></Uncompleted>
-                    }
+                <div className="todoBox-container">
+                    <div className="todosOf__item offset-md-2">
+                        <a href="" onClick={(e) => {
+                            setAll('today');
+                            setCompleted('');
+                            e.preventDefault();
+                            handleActiveButton('today');
+                        }} className={`px-4 py-2 mt-2 todosOf__items todosOf__item--today ${activeButton === 'today' ? 'activeButtonStyle' : ''}`}><CgToday className="m-1"></CgToday>today</a>
+                        <br />
+                        <a href="" onClick={(e) => {
+                            setAll('next7');
+                            setCompleted('');
+                            e.preventDefault();
+                            handleActiveButton('next7');
+                        }} className={`px-4 py-2 mt-2 todosOf__items todosOf__item--next ${activeButton === 'next7' ? 'activeButtonStyle' : ''}`}><CgCalendarNext className="m-1"></CgCalendarNext>next 7 days</a>
+                        <br />
+                        <a href="" onClick={(e) => {
+                            setAll('all');
+                            setCompleted('');
+                            e.preventDefault();
+                            handleActiveButton('showAll');
+                        }} className={`px-4 py-2 mt-2 todosOf__items todosOf__item--all ${activeButton === 'showAll' ? 'activeButtonStyle' : ''}`}><BsListUl className="m-1"></BsListUl>show all
+                        </a>
+                        <br />
+                        <a href="" onClick={(e) => {
+                            setAll('status');
+                            e.preventDefault();
+                            handleActiveButton('status');
+                        }} className={`px-4 py-2 mt-2 todosOf__items todosOf__item--status ${activeButton === 'status' ? 'activeButtonStyle' : ''}`}><GrStatusInfo className="m-1"></GrStatusInfo>status</a>
+                    </div>
+                    <div className="todoBox">
+                        {all === 'today' && <Today todos={todos}></Today>}
+                        {all === 'next7' && <NextSeven todos={todos}></NextSeven>}
+                        {all === 'all' && <AllTodos todos={todos}></AllTodos>}
+                        {all === 'status' &&
+                            <div className="text-center TodosList p-4">
+                                <select name="" id="done" onChange={handleOption} className="form-select" aria-label="Default select example">
+                                    <option value="">Please choose an option</option>
+                                    <option value="alls">all</option>
+                                    <option value="completed">completed</option>
+                                    <option value="uncompleted">uncompleted</option>
+                                </select>
+                            </div>
+                        }
+                        {
+                            completed === 'alls' && <AllTodos todos={todos}></AllTodos>
+                        }
+                        {
+                            completed === 'completed' && <Completed todos={todos}></Completed>
+                        }
+                        {
+                            completed === 'uncompleted' && <Uncompleted todos={todos}></Uncompleted>
+                        }
+                    </div>
+
                 </div>
                 <Modal showModal={showModal} setShowModal={setShowModal}>
                     <div className="modalBox mt-4">
@@ -181,14 +186,14 @@ const Sidebar = () => {
                                 </div>
                             </div>
                             <div className="text-center">
-                                <input type="submit" value="Add A Todo" class="btn btn-primary add-btn p-2" />
+                                <input type="submit" value="Add A Todo" className="btn w-100 add-btn submit-btn p-2" />
                             </div>
                         </form>
-                        <div className="text-center mt-2">
-                            <p style={{ color: 'red' }}>{err}</p>
+                        <div className="text-center">
+                            <p className="error" style={{ color: 'red' }}>{err}</p>
                         </div>
                         {/* <p>{time}</p> */}
-                        <a href="#" onClick={() => setShowModal(false)}><MdCancel className="cancelIcon"></MdCancel></a>
+                        <button href="#" onClick={() => setShowModal(false)}><MdCancel className="cancelIcon"></MdCancel></button>
                     </div>
                 </Modal>
             </div>
