@@ -10,37 +10,38 @@ import { BsListUl } from 'react-icons/bs';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import TimePicker from 'react-time-picker';
+import moment from 'moment';
 
 //components import
 import Modal from '../Modal/Modal';
 import AllTodos from '../AllTodos/AllTodos';
 import NextSeven from '../NextSeven/NextSeven';
 import Today from '../Today/Today';
-import moment from 'moment';
 import { TodoContext } from '../../../App';
 import Completed from '../Completed/Completed';
 import Uncompleted from '../Uncompleted/Uncompleted';
 
-let todoId = 0;
+// let todoId = 0;
 
 const Sidebar = () => {
-    const [todos, setTodos] = useContext(TodoContext);
+    const [todos, setTodos, showModal, setShowModal] = useContext(TodoContext);
 
-    const [showModal, setShowModal] = useState(false);
+    // const [showModal, setShowModal] = useState(false);
     const [name, setName] = useState('');
     const [date, setDate] = useState(new Date());
     const [time, setTime] = useState('');
+    console.log('dates', date);
     const [all, setAll] = useState('');
     const [err, setErr] = useState('');
     const [completed, setCompleted] = useState('');
     const [activeButton, setActiveButton] = useState(null);
 
-
     const handleSubmit = (e) => {
         e.preventDefault();
         if (time && name) {
+            // let todoId = 0;
             setTodos([...todos, {
-                id: todoId++,
+                id: Math.random() * 1000,
                 names: name,
                 dates: moment(date).format('DD/MM/YYYY'),
                 times: moment(time, "HH:mm:ss").format('hh:mm a'),
@@ -126,9 +127,9 @@ const Sidebar = () => {
                         }} className={`px-4 py-2 mt-2 todosOf__items todosOf__item--status ${activeButton === 'status' ? 'activeButtonStyle' : ''}`}><GrStatusInfo className="m-1"></GrStatusInfo>status</a>
                     </div>
                     <div className="todoBox">
-                        {all === 'today' && <Today todos={todos}></Today>}
-                        {all === 'next7' && <NextSeven todos={todos}></NextSeven>}
-                        {all === 'all' && <AllTodos todos={todos}></AllTodos>}
+                        {all === 'today' && <Today setActiveButton={setActiveButton} todos={todos}></Today>}
+                        {all === 'next7' && <NextSeven setActiveButton={setActiveButton} todos={todos}></NextSeven>}
+                        {all === 'all' && <AllTodos setActiveButton={setActiveButton} todos={todos}></AllTodos>}
                         {all === 'status' &&
                             <div className="text-center TodosList p-4">
                                 <select name="" id="done" onChange={handleOption} className="form-select" aria-label="Default select example">
@@ -140,7 +141,7 @@ const Sidebar = () => {
                             </div>
                         }
                         {
-                            completed === 'alls' && <AllTodos todos={todos}></AllTodos>
+                            completed === 'alls' && <AllTodos setAll={setAll} todos={todos}></AllTodos>
                         }
                         {
                             completed === 'completed' && <Completed todos={todos}></Completed>

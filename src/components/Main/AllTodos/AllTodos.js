@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import { TodoContext } from '../../../App';
 import Todo from '../Todo/Todo';
 
-const AllTodos = () => {
+const AllTodos = ({setAll, setActiveButton}) => {
     const [todos, setTodos] = useContext(TodoContext);
 
     return (
@@ -11,7 +11,7 @@ const AllTodos = () => {
                 <h3>Your Todos List : <bold className="alltodosLength">({todos.length})</bold></h3>
             </div>
             {
-                todos.map(todo => <Todo checked={todo.checked} key={todo.id} todo={todo}></Todo>)
+                todos.map(todo => <Todo setAll={setAll} checked={todo.checked} key={todo.id} todo={todo} setActiveButton={setActiveButton}></Todo>)
             }
         </div>
     );

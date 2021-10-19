@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import moment from 'moment'
 import Todo from '../Todo/Todo'
 
-function NextSeven({ todos }) {
+function NextSeven({ todos, setActiveButton }) {
     const [weekTodos, setWeekTodos] = useState([]);
 
     useEffect(() => {
@@ -41,7 +41,7 @@ function NextSeven({ todos }) {
                         <div className='todos'>
                             {
                                 day.todos.map(todo =>
-                                    <Todo checked={todo.checked} key={todo.id} todo={todo} />
+                                    <Todo checked={todo.checked} key={todo.id} todo={todo} setActiveButton={setActiveButton}/>
                                 )
                             }
                         </div>

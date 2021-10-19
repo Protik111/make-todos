@@ -1,17 +1,41 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { MdDateRange } from 'react-icons/md';
+// import { MdDateRange } from 'react-icons/md';
 import { MdRadioButtonUnchecked, MdRadioButtonChecked } from 'react-icons/md';
 import { AiOutlineFieldTime, AiFillDelete } from 'react-icons/ai';
 import { FcEditImage, FcCheckmark, FcCalendar } from 'react-icons/fc';
 import { TodoContext } from '../../../App';
+import EditTodo from '../EditTodo/EditTodo';
+import EditModal from '../EditTodo/EditModal';
+
+import { MdDateRange, MdCancel } from 'react-icons/md';
+import DatePicker from "react-datepicker";
+// import { AiOutlineFieldTime } from 'react-icons/ai';
+import "react-datepicker/dist/react-datepicker.css";
+import TimePicker from 'react-time-picker';
 
 let dayName = '';
 
-const Todo = ({ todo, setTodo, dayNameShow, random, todayDate, checked }) => {
+const Todo = ({ todo, setTodo, dayNameShow, random, todayDate, checked, setAll, setActiveButton }) => {
 
-    const [todos, setTodos] = useContext(TodoContext);
+    const [todos, setTodos, showModal, setShowModal] = useContext(TodoContext);
     const [check, setCheck] = useState(false);
     const [todoLength, setTodoLength] = useState([]);
+    const [edit, setEdit] = useState(false);
+    const [editShowModal, setEditShowModal] = useState(false);
+    const [selectedId, setSelectedId] = useState(null);
+
+    const handleEdit = (id) => {
+        setEdit(!edit);
+        setEditShowModal(true);
+        console.log(id);
+        setSelectedId(id);
+        // setActiveButton(null);
+        // setAll('');
+    }
+
+    const handleSubmit = () => {
+        console.log('data');
+    }
 
     const handleLength = () => {
         setTodoLength(todos.filter(tds => tds.dates === todayDate));
@@ -72,11 +96,11 @@ const Todo = ({ todo, setTodo, dayNameShow, random, todayDate, checked }) => {
                     <p className={`todoNames ${checked === true ? 'checked' : ''}`}>{todo.names}</p>
                 </div>
                 <div className="todoIconBox">
-                    <button data-toggle="tooltip" data-placement="top" title="Edit" className="iconBtn"><FcEditImage className="todoIcons"></FcEditImage></button>
+                    <button onClick={() => handleEdit(todo.id)} data-toggle="tooltip" data-placement="top" title="Edit" className="iconBtn"><FcEditImage className="todoIcons"></FcEditImage></button>
 
                     <button onClick={() => handleCheck(todo.id)} data-toggle="tooltip" data-placement="top" title="Done" className="iconBtn doneBtn">{!checked ? <MdRadioButtonUnchecked className="todoIcons"></MdRadioButtonUnchecked> : <MdRadioButtonChecked className="todoIcons doneIcon"></MdRadioButtonChecked>}</button>
 
-                    <button onClick={() => handleDelete(todo.id)} data-toggle="tooltip" data-placement="top" title="Delete" className="iconBtn"><AiFillDelete className="todoIcons" style={{color: 'rgb(209, 19, 19)'}}></AiFillDelete></button>
+                    <button onClick={() => handleDelete(todo.id)} data-toggle="tooltip" data-placement="top" title="Delete" className="iconBtn"><AiFillDelete className="todoIcons" style={{ color: 'rgb(209, 19, 19)' }}></AiFillDelete></button>
                 </div>
             </div>
             <div className="tododetail">
@@ -87,6 +111,12 @@ const Todo = ({ todo, setTodo, dayNameShow, random, todayDate, checked }) => {
                     <p><AiOutlineFieldTime></AiOutlineFieldTime>{todo.times === 'Invalid date' ? 'Invalid Time' : todo.times}</p>
                 </div>
             </div>
+            {
+                edit && editShowModal &&
+                <EditModal edit={edit} editShowModal={editShowModal} selectedId={selectedId} setSelectedId={setSelectedId} setEditShowModal={setEditShowModal}>
+                   
+                </EditModal>
+            }
         </div>
     );
 };

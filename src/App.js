@@ -16,6 +16,7 @@ const getTodosLocal = () => {
 
 function App() {
   const [todos, setTodos] = useState(getTodosLocal());
+  const [showModal, setShowModal] = useState(false);
 
 
   useEffect(() => {
@@ -23,7 +24,7 @@ function App() {
   }, [todos]);
   
   return (
-    <TodoContext.Provider value={[todos, setTodos]}>
+    <TodoContext.Provider value={[todos, setTodos, showModal, setShowModal]}>
       <div className="App">
         <Header></Header>
         <Main></Main>
